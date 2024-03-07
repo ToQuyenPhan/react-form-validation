@@ -1,8 +1,9 @@
 import React from 'react';
 import useForm from './useForm';
+import validate from './validateForm';
 
-const SignupForm = () => {
-    const { handleChange, values, handleSubmit } = useForm();
+const SignupForm = ({submitForm}) => {
+    const { handleChange, values, handleSubmit, errors } = useForm(submitForm, validate);
 
     return (
         <div className="form-content-right">
@@ -14,6 +15,7 @@ const SignupForm = () => {
                     </label>
                     <input id='username' name='username' type="text" className="form-input" placeholder='Enter your username...'
                         value={values.username} onChange={handleChange} />
+                    {errors.username && <p>{errors.username}</p>}
                 </div>
                 <div className="form-inputs">
                     <label htmlFor="email" className="form-label">
@@ -21,6 +23,7 @@ const SignupForm = () => {
                     </label>
                     <input id='email' name='email' type="email" className="form-input" placeholder='Enter your email...' 
                         value={values.email} onChange={handleChange} />
+                    {errors.email && <p>{errors.email}</p>}
                 </div>
                 <div className="form-inputs">
                     <label htmlFor="password" className="form-label">
@@ -28,6 +31,7 @@ const SignupForm = () => {
                     </label>
                     <input id='password' name='password' type="password" className="form-input" placeholder='Enter your password...'
                         value={values.password} onChange={handleChange} />
+                    {errors.password && <p>{errors.password}</p>}
                 </div>
                 <div className="form-inputs">
                     <label htmlFor="password2" className="form-label">
@@ -35,6 +39,7 @@ const SignupForm = () => {
                     </label>
                     <input id='password2' name='password2' type="password" className="form-input" 
                         placeholder='Enter your confirm password...' value={values.password2} onChange={handleChange} />
+                    {errors.password2 && <p>{errors.password2}</p>}
                 </div>
                 <button className="form-input-btn" type='submit'>Sign up</button>
                 <span className="form-input-login">
